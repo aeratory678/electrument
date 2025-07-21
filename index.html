@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>electrument</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg transform='rotate(-30 32 32)'%3E%3Ctext x='12' y='48' font-size='40' font-family='Arial' fill='%23fff'%3Eet%3C/text%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Miller&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="settings-container">
+    <button id="settings-btn" aria-label="Settings">
+      <!-- Minimalist classic cog icon -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="2.2"/>
+        <path d="M19.4 15.5a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h.2A1.7 1.7 0 0 0 9 3.2V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h.2a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v.2a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1z"/>
+      </svg>
+    </button>
+    <div id="settings-panel" class="hidden">
+      <label>
+        <span class="settings-icon">👁️</span>
+        <input type="checkbox" id="hide-labels-checkbox" class="custom-checkbox" />
+        Hide notes & letters
+        <span class="settings-tooltip" title="Hide all note and letter labels on the keyboard.">?</span>
+      </label>
+      <div class="settings-divider"></div>
+      <label>
+        <span class="settings-icon">🎼</span>
+        Scale/Mode:
+        <select id="scale-mode-select">
+          <option value="major">Major Scale</option>
+          <option value="chromatic">Chromatic (All Notes)</option>
+        </select>
+        <span class="settings-tooltip" title="Switch between major scale and chromatic (all notes) mode.">?</span>
+      </label>
+      <div class="settings-divider"></div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="settings-icon">🎹</span>
+        <button id="octave-down" class="octave-btn" title="Octave Down">&#8595;</button>
+        <span id="octave-display" style="color:#fff;font-size:1.1rem;margin:0 8px;vertical-align:middle;">Octave: 4</span>
+        <button id="octave-up" class="octave-btn" title="Octave Up">&#8593;</button>
+        <span class="settings-tooltip" title="Shift the keyboard up or down by octave.">?</span>
+      </div>
+      <div class="settings-divider"></div>
+      <label>
+        <span class="settings-icon">🎵</span>
+        Instrument:
+        <select id="instrument-select">
+          <option value="piano">Piano</option>
+          <option value="synth">Synth</option>
+          <option value="organ">Organ</option>
+        </select>
+        <span class="settings-tooltip" title="Choose the instrument sound for the keyboard.">?</span>
+      </label>
+      <div class="settings-divider"></div>
+      <div id="theme-section">
+        <label>
+          <span class="settings-icon">🎨</span>
+          Theme:
+          <select id="theme-select">
+            <option value="classic">Classic</option>
+            <option value="dark">Dark</option>
+            <option value="neon">Neon</option>
+            <option value="rainbow">Rainbow</option>
+            <option value="custom">Custom</option>
+          </select>
+        </label>
+        <div id="custom-colors" style="display:none; margin-top:8px;">
+          <div style="margin-bottom:6px;">
+            <span style="font-size:0.9em;">Background:</span>
+            <input type="color" id="bg-gradient-start" value="#222244" title="Gradient Start" />
+            <input type="color" id="bg-gradient-end" value="#444488" title="Gradient End" />
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="font-size:0.9em;width:100%;">Per-Key Colors:</span>
+            <div id="per-key-colors" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="keyboard" class="keyboard"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.27/build/Midi.min.js"></script>
+  <script src="lame.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

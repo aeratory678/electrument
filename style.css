@@ -1,0 +1,257 @@
+body {
+  background: #181c20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.keyboard {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  max-width: 100vw;
+  box-sizing: border-box;
+  padding: 16px;
+  position: relative;
+}
+
+.key {
+  width: 70px;
+  height: 180px;
+  background: #23272f;
+  border-radius: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.2s, background 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+.key.active {
+  /* The glow will be set inline for each key */
+  background: #333;
+  color: #fff;
+}
+
+.key-label {
+  margin-bottom: 18px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 2px;
+  /* Add support for a second line */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.key-bar-anim {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 60%;
+  height: 28px;
+  border-radius: 8px 8px 4px 4px;
+  transform: translate(-50%, 0);
+  opacity: 1;
+  z-index: 2;
+  transition: transform 0.38s cubic-bezier(.4,1.6,.4,1), opacity 0.38s;
+  pointer-events: none;
+}
+
+.key-bar-anim.active {
+  transform: translate(-50%, -60px);
+  opacity: 0;
+}
+
+@media (max-width: 900px) {
+  .key {
+    width: 48px;
+    height: 120px;
+    font-size: 1.3rem;
+  }
+  .keyboard {
+    gap: 10px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .key {
+    width: 32vw;
+    max-width: 38px;
+    height: 80px;
+    font-size: 1rem;
+  }
+  .keyboard {
+    gap: 6px;
+    padding: 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .key {
+    width: 24vw;
+    max-width: 28px;
+    height: 60px;
+    font-size: 0.8rem;
+  }
+}
+
+#settings-container {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+}
+#settings-btn {
+  background: rgba(30,30,40,0.9);
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background 0.2s;
+}
+#settings-btn:hover {
+  background: rgba(60,60,80,1);
+}
+#settings-panel {
+  margin-top: 8px;
+  background: #23272f;
+  border-radius: 12px;
+  padding: 18px 22px 16px 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  display: block;
+  min-width: 220px;
+  border: 1.5px solid #333b4a;
+  position: relative;
+}
+#settings-panel.hidden {
+  display: none;
+}
+#settings-panel label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+  color: #e0e0e0;
+  cursor: pointer;
+  position: relative;
+}
+#settings-panel .settings-divider {
+  border-top: 1px solid #444a5a;
+  margin: 10px 0 14px 0;
+}
+#settings-panel .settings-icon {
+  display: none;
+}
+#settings-panel .custom-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #888;
+  border-radius: 5px;
+  background: #23272f;
+  margin-right: 6px;
+  transition: border 0.2s, background 0.2s;
+  position: relative;
+}
+#settings-panel .custom-checkbox:checked {
+  border-color: #4fd1c5;
+  background: #2d3748;
+}
+#settings-panel .custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid #4fd1c5;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+#settings-panel select {
+  background: #23272f;
+  color: #fff;
+  border: 1.5px solid #444a5a;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 1rem;
+  margin-left: 8px;
+  transition: border 0.2s;
+}
+#settings-panel select:focus {
+  border-color: #4fd1c5;
+  outline: none;
+}
+#settings-panel label:hover, #settings-panel select:hover {
+  background: #262b36;
+  border-radius: 6px;
+}
+#settings-panel .settings-tooltip {
+  display: none;
+}
+
+/* --- Recording Controls --- */
+#rec-controls {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  z-index: 1000;
+  background: rgba(30,30,40,0.97);
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: 0 2px 16px #0006;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.rec-btn {
+  background: linear-gradient(90deg, #23272f 60%, #23272f 100%);
+  color: #4fd1c5;
+  border: 1.5px solid #333b4a;
+  border-radius: 8px;
+  font-size: 1.18rem;
+  font-family: inherit;
+  padding: 7px 15px 7px 13px;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.rec-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: #23272f;
+  color: #888;
+  border-color: #23272f;
+}
+.rec-btn:hover:not(:disabled) {
+  background: #2d3748;
+  color: #fff;
+  border-color: #4fd1c5;
+}
+.rec-btn svg {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  margin-right: 3px;
+  fill: currentColor;
+}
